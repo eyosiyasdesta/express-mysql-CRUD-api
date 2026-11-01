@@ -45,7 +45,7 @@ Request body (JSON):
 ## Roadmap
 
 - [x] POST (create)
-- [ ] GET (read)
+- [x] GET (read)
 - [ ] PUT (update)
 - [ ] DELETE (remove)
 
