@@ -56,6 +56,49 @@ app.post("/students", (req, res) => {
     },
   );
 });
+// Deleting data
+app.delete("/students/:id", (req, res) => {
+  pool.query(
+    "DELETE FROM students WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: err.message });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Student not found" });
+      }
+      res.json({ message: "Student deleted" });
+    },
+  );
+});
+// Put
+app.put("/students/:id", (req, res) => {
+  const { name, email } = req.body;
+
+  if (!name || !email) {
+    return res.status(400).json({ error: "name and email are required" });
+  }
+
+  pool.query(
+    "UPDATE students SET name = ?, email = ? WHERE id = ?",
+    [name, email, req.params.id],
+    (err, result) => {
+      if (err) {
+        if (err.code === "ER_DUP_ENTRY") {
+          return res.status(409).json({ error: "Email already exists" });
+        }
+        console.error(err);
+        return res.status(500).json({ error: err.message });
+      }
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Student not found" });
+      }
+      res.json({ id: Number(req.params.id), name, email });
+    },
+  );
+});
 app.listen(process.env.PORT, (err) => {
   if (err) {
     console.error(err.message);

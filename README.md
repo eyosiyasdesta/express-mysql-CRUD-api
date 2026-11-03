@@ -49,8 +49,8 @@ Request body (JSON):
 
 - [x] POST (create)
 - [x] GET (read)
-- [ ] PUT (update)
-- [ ] DELETE (remove)
+- [x] PUT (update)
+- [x] DELETE (remove)
 
 ## Stack
 
