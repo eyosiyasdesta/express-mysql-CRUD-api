@@ -27,6 +27,9 @@ Express API with MySQL (MAMP) for managing students. Data can be added through a
 
 ## API
 
+GET /students
+GET /students/:id
+
 ### POST /students
 
 Request body (JSON):
